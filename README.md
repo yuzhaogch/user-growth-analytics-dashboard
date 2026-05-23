@@ -1,169 +1,295 @@
-# Data Storytelling Dashboard, E-Commerce Analytics
+# 用户增长与经营分析看板
 
-An interactive **data visualization and analytics dashboard** that transforms raw e-commerce data into **actionable business insights**.  
-Built with **Python**, **Streamlit**, and **Plotly**, this project demonstrates advanced **data storytelling**, combining statistical analysis, cohort segmentation, and dynamic visualization.
-
----
-
-## Project Overview
-
-This dashboard simulates a full-fledged analytics workflow for an e-commerce company.  
-It provides end-to-end functionality from data ingestion and cleaning to **KPI reporting**, **customer segmentation**, **retention analysis**, and **geographical sales intelligence**.
-
-The project is powered by a **synthetic dataset** (4,000+ orders across 2 years, 1,600+ customers, 10+ countries, and 5 categories).  
+基于开源电商分析项目完成二次开发的增长分析作品。项目使用 `Python + Pandas + Streamlit + Plotly` 搭建，围绕 **活跃、转化、留存、用户价值分层** 四类核心问题，对模拟电商订单数据进行分析与可视化展示。
 
 ---
 
-## Objectives
+## 项目概述
 
-1. **Tell a story with data:** Convert large, unstructured datasets into interactive visual narratives.  
-2. **Build an analyst-friendly interface:** Enable filtering by country, channel, category, and time period.  
-3. **Provide actionable insights:** Identify best-performing channels, categories, and customer segments.  
-4. **Demonstrate advanced analytics:** Use RFM segmentation and cohort analysis to uncover retention patterns.  
+原始开源项目更偏向电商销售分析，重点展示营收、利润、品类贡献等销售结果。  
+本次二次开发将项目重构为更贴近 **数据分析 / 商业分析 / 数据产品** 场景的用户增长与经营分析看板，关注的问题包括：
 
----
+- 当前活跃与支付转化表现如何
+- 新增用户后续留存情况如何
+- 不同渠道带来的用户质量是否存在差异
+- 用户从首次下单到复购、高价值的经营转化路径如何
 
-## Key Metrics & Definitions
-
-| Metric | Description |
-|--------|--------------|
-| **Revenue** | Total gross sales after discounts |
-| **Profit** | Revenue − Cost |
-| **Orders** | Number of unique purchase transactions |
-| **Customers** | Number of unique buyers |
-| **AOV (Average Order Value)** | Mean revenue per order |
-| **Margin %** | Profit ÷ Revenue |
+本项目适合作为：
+- 数据分析 / 商业分析作品集项目
+- 数据产品方向的分析后台 Demo
+- 增长分析与经营分析案例
 
 ---
 
-## Analytics Features
+## 本次升级重点
 
-**KPI Cards** | Summaries for Revenue, Profit, Orders, Customers, AOV, and Margin  
-**Trend Charts** | Monthly revenue & profit trends  
-**Category & Product Insights** | Top-performing product lines  
-**Channel Revenue Share** | Pie chart for sales by acquisition channel  
-**Geographical Breakdown** | Country → City treemap for global sales distribution  
-**Cohort Retention Analysis** | Track customer re-purchase behavior  
-**RFM Segmentation** | Classify customers into “Champions”, “Active”, and “New/Cold”  
+相较于原始开源项目，本次二次开发主要完成了以下升级：
 
----
-
-## Dashboard Preview
-
-### KPI Overview & Monthly Revenue Trends
-<img width="1358" height="443" alt="Screenshot 2025-11-01 at 19-31-23 Data Storytelling Dashboard" src="https://github.com/user-attachments/assets/4fc7a6fa-5303-46c1-9e78-df21b75003e2" />
-
-### Monthly Revenue & Profit
-<img width="1281" height="420" alt="newplot(3)" src="https://github.com/user-attachments/assets/418bf06b-c301-422b-ba50-14889734c701" />
-
-### Customers by RFM Segment
-<img width="1281" height="450" alt="newplot(8)" src="https://github.com/user-attachments/assets/66902cad-0c84-4200-b2ca-45e1af2d020e" />
-
-### Channel Revenue Share
-<img width="1281" height="450" alt="newplot(7)" src="https://github.com/user-attachments/assets/1002f593-afc3-48cb-9d3d-f8e158535b1c" />
-
-### Revenue by Geography (Country → City)
-<img width="1281" height="450" alt="newplot(6)" src="https://github.com/user-attachments/assets/9194c3af-fe88-41cb-87ee-22d3967ab082" />
-
-### Top 15 Products
-<img width="632" height="450" alt="newplot(5)" src="https://github.com/user-attachments/assets/c079b4bf-05a2-4a6c-8354-a9b948c15263" />
-
-### Revenue by Category
-<img width="632" height="450" alt="newplot(4)" src="https://github.com/user-attachments/assets/6267779a-54ca-455a-854a-3eebc0e6105c" />
+- 将项目定位从“电商销售分析”调整为“用户增长与经营分析”
+- 将首页 KPI 重构为增长与留存口径
+- 新增 **经营漏斗分析** 模块
+- 新增 **留存分析** 模块
+- 重构用户分层表达，改为更贴近增长分析的价值分层展示
+- 调整页面标题、模块标题与整体业务文案
+- 保留原项目中可复用的经营分析视图，增强业务完整性
 
 ---
 
-## Analytical Highlights
+## 核心功能
 
-- **Total Revenue:** $9.8 M  
-- **Total Profit:** $3.0 M (~31% margin)  
-- **Active Customers:** 1,613  
-- **Top Channel:** Web (44.5%)  
-- **Leading Category:** Electronics (~ $2.3 M)  
-- **Customer Segmentation:**  
-  - 42% New/Cold  
-  - 30% Active  
-  - 28% Champions  
+### 1. 增长指标总览
 
-These insights are based on synthetic two-year transaction data.  
+首页提供 6 个核心指标：
+
+- `DAU`
+- `新增用户`
+- `下单用户`
+- `支付用户`
+- `支付转化率`
+- `次日留存率`
+
+这些指标用于快速判断当前筛选范围内的增长和经营表现。
+
+### 2. 经营漏斗分析
+
+基于现有订单数据构建简化经营漏斗，包含：
+
+- `新增用户`
+- `下单用户`
+- `支付用户`
+- `复购用户`
+- `高价值用户`
+
+页面展示：
+
+- 漏斗图
+- 各阶段用户数
+- 整体转化率
+- 环节流失率
+
+> 说明：由于当前数据源是订单表而非完整行为事件表，因此这里使用的是 **经营漏斗**，而不是 `visit -> register -> browse -> add_to_cart -> order -> pay` 的埋点行为漏斗。
+
+### 3. 留存分析
+
+留存模块包括：
+
+- 新增 cohort 用户数
+- 次日留存率
+- 7 日留存率
+- 分渠道留存对比
+- Cohort 留存热力图
+
+该模块重点用于观察不同批次用户和不同渠道用户的后续活跃表现。
+
+### 4. 用户价值分层
+
+基于 RFM 思路进行用户分层，并在页面中展示：
+
+- 新客 / 沉默
+- 活跃
+- 高价值
+
+该模块用于辅助识别用户价值结构和经营重点人群。
+
+### 5. 经营分析补充视图
+
+保留了原项目中可复用的经营分析图表，包括：
+
+- 月度营收与利润趋势
+- 各品类营收贡献
+- Top 15 产品营收贡献
+- 渠道贡献占比
+- 地理分布营收贡献
+
+这些模块用于补充增长分析之外的经营结构观察。
 
 ---
 
-## Tech Stack
+## 技术栈
 
-| Component | Description |
-|------------|-------------|
-| **Python** | Data processing & analytics |
-| **Pandas / NumPy** | Data wrangling & KPI computation |
-| **Streamlit** | Web-based dashboard |
-| **Plotly** | Interactive visualizations |
-| **Statsmodels / Prophet (optional)** | Time series forecasting |
-| **Scikit-Learn** | RFM modeling & segmentation |
-| **Great Expectations / Pandera** | Future data-quality integration |
+| 组件 | 说明 |
+|------|------|
+| `Python` | 数据处理与分析 |
+| `Pandas` | 清洗、聚合、指标计算 |
+| `Streamlit` | 仪表盘搭建 |
+| `Plotly` | 交互式图表 |
+| `NumPy` | 数值处理 |
 
 ---
 
-## Getting Started
+## 数据说明
 
-### Clone the Repository
-```bash
-git clone https://github.com/yourusername/data-storytelling-dashboard.git
-cd data-storytelling-dashboard
+数据源为模拟电商订单数据，主表字段包括：
+
+- `order_id`
+- `order_date`
+- `customer_id`
+- `country`
+- `city`
+- `channel`
+- `product_id`
+- `category`
+- `subcategory`
+- `unit_price`
+- `quantity`
+- `discount`
+- `revenue`
+- `cost`
+
+代码中还派生了以下字段：
+
+- `order_month`
+- `profit`
+
+仓库中补充了可重复执行的造数脚本：
+
+- `scripts/generate_synthetic_orders.py`
+
+该脚本基于固定随机种子生成模拟订单数据，核心逻辑包括：
+
+- 先生成用户池：国家、城市、偏好渠道、消费倾向、复购倾向
+- 再生成商品池：品类、子品类、基础价格带
+- 为每个用户分配订单数
+- 按日期范围生成首单与复购订单
+- 基于价格、数量、折扣、成本率生成 `revenue` 和 `cost`
+
+---
+
+## 指标口径
+
+### 增长指标
+
+- `DAU`  
+  当前筛选范围内，最新一天发生订单行为的去重用户数
+
+- `新增用户`  
+  首次下单日期落在当前筛选周期内的用户数
+
+- `下单用户`  
+  当前筛选范围内有下单行为的去重用户数
+
+- `支付用户`  
+  当前筛选范围内 `revenue > 0` 的去重用户数
+
+- `支付转化率`  
+  `支付用户 / 下单用户`
+
+- `次日留存率`  
+  以首购用户为 cohort，统计首购后第 1 天是否再次活跃
+
+### 留存指标
+
+- `7日留存率`  
+  以首购用户为 cohort，统计首购后第 7 天是否再次活跃
+
+- `分渠道留存`  
+  按用户首次下单渠道划分 cohort，比较不同渠道的 D1 / D7 留存
+
+### 漏斗指标
+
+- `复购用户`  
+  当前筛选范围内订单数大于等于 2 的用户
+
+- `高价值用户`  
+  当前筛选范围内累计营收处于前 25% 的用户
+
+---
+
+## 项目结构
+
+```text
+Data-Storytelling-Dashboard/
+├─ app/
+│  ├─ app.py
+│  └─ utils/
+│     └─ data_utils.py
+├─ data/
+│  ├─ orders.csv
+│  └─ user_profiles.csv
+├─ scripts/
+│  └─ generate_synthetic_orders.py
+├─ requirements.txt
+└─ README.md
 ```
 
-### Install Dependencies
+---
+
+## 本地运行
+
+### 1. 安装依赖
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### Run the Dashboard
+### 2. 启动项目
+
 ```bash
 streamlit run app/app.py
 ```
 
-The app will open at `http://localhost:8501/`.
+启动后访问：
 
-### (Optional) Use Your Own Dataset
+```text
+http://localhost:8501/
+```
+
+### 3. 自定义数据源
+
+可以通过环境变量指定订单 CSV：
+
+```powershell
+$env:ORDERS_CSV="C:\path\to\orders.csv"
+streamlit run app/app.py
+```
+
+### 4. 重新生成模拟数据
+
+先预览生成结果：
+
 ```bash
-export ORDERS_CSV=/path/to/your/orders.csv
-# Windows PowerShell
-$env:ORDERS_CSV="C:\path\orders.csv"
+python scripts/generate_synthetic_orders.py --preview
 ```
 
-Your dataset must include:  
-`order_id`, `order_date`, `customer_id`, `country`, `city`, `channel`, `product_id`, `category`, `subcategory`, `unit_price`, `quantity`, `discount`, `revenue`, `cost`.
+生成新的订单数据文件：
+
+```bash
+python scripts/generate_synthetic_orders.py --output data/orders_regenerated.csv
+```
+
+常用参数：
+
+- `--seed`  
+  控制随机种子，保证结果可复现
+
+- `--orders`  
+  控制订单数量，默认 `4000`
+
+- `--customers`  
+  控制用户池大小，默认 `1613`
+
+- `--first-time-buyers`  
+  控制至少出现一次的用户数，默认 `1613`
 
 ---
 
-## Folder Structure
-```
-data_storytelling_dashboard/
-├── data/
-│   └── orders.csv              # Synthetic e-commerce dataset
-├── app/
-│   ├── app.py                  # Streamlit main app
-│   └── utils/
-│       └── data_utils.py       # Functions for KPIs, filtering, cohort, RFM
-├── requirements.txt
-└── README.md
-```
+## 简历描述参考
+
+**用户增长与经营分析看板项目（基于开源项目二次开发）**  
+`Python / Pandas / Streamlit / Plotly / SQL`
+
+- 基于开源电商分析项目完成二次开发，将项目定位从销售分析调整为用户增长与经营分析看板，围绕活跃、转化、留存与用户价值展开展示  
+- 使用 `Pandas` 完成模拟订单数据清洗、聚合与指标计算，构建 DAU、新增用户、支付用户、支付转化率、次日留存率等核心经营指标  
+- 设计并实现经营漏斗分析模块，围绕新增用户、下单用户、支付用户、复购用户、高价值用户展示各阶段人数、整体转化率与环节流失率  
+- 新增留存分析模块，支持 cohort 用户数、次日/7日留存率、分渠道留存对比与 cohort 热力图展示，辅助识别不同渠道带来的用户后续表现差异  
 
 ---
 
-## Possible Extensions
+## 面试表述建议
 
-- **Sales Forecasting** (Prophet / ARIMA)  
-- **Customer Churn Prediction** using classification models  
-- **Marketing ROI Analytics** & A/B testing  
-- **Enhanced Geo-maps** using Plotly Choropleths  
-- **Automated Insight Narratives** (LLM-based summaries)  
-- **Deployment** via Streamlit Cloud / Render / Hugging Face Spaces  
+如果用于面试，可以重点强调：
 
----
-
-## Insights Summary (Example Story)
-
-> “Between Jan 2023 and Oct 2024, overall revenue reached **$9.8 M** with an average margin of **30.9 %**.  
-> The **Web** and **Mobile App** channels contributed **75 %** of total sales.  
-> Electronics dominated category performance, while the **India** and **Germany** markets showed the highest growth rates.  
-> Customer retention remains strong across cohorts, with ~30 % returning after 6 months.”
+- 这是一个 **基于开源项目的二次开发作品**
+- 重点改造的不是 UI，而是 **指标体系、分析模块和业务表达**
+- 漏斗使用的是 **经营漏斗**，口径与数据源保持一致
+- 项目最能体现的是：如何把业务问题转成指标和分析页面
