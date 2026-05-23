@@ -271,3 +271,4 @@ python scripts/generate_synthetic_orders.py --output data/orders_regenerated.csv
 - `--first-time-buyers`  
   控制至少出现一次的用户数，默认 `1613`
 
+---
